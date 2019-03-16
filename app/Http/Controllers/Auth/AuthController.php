@@ -27,9 +27,7 @@ class AuthController extends Controller
     | a simple trait to add these behaviors. Why don't you explore it?
     |
     */
-
     use ThrottlesLogins;
-
 
     /**
      * Create a new authentication controller instance.
@@ -40,44 +38,34 @@ class AuthController extends Controller
     {
         $this->auth = $auth;
         $this->middleware('guest', ['except' => 'getLogout']);
-
     }
-
     /**
      * Get a validator for an incoming registration request.
      *
      * @param  array  $data
      * @return \Illuminate\Contracts\Validation\Validator
      */
-
-
-
 //login
-
     protected function getLogin()
     {
         return view("login");
     }
 
-
     public function postLogin(Request $request)
     {
         $this->validate($request, [
-            'email' => 'required',
+            'username' => 'required',
             'password' => 'required',
         ]);
 
-        $credentials = $request->only('email', 'password');
+        $credentials = $request->only('username', 'password');
 
         if ($this->auth->attempt($credentials, $request->has('remember')))
         {
             return view("home");
         }
-
         return view()->with("msjerror","credenciales incorrectas");
-
     }
-
 
 //login
 
@@ -89,8 +77,9 @@ class AuthController extends Controller
 
     protected function postRegister(Request $request){
         $this->validate($request, [
-
-            'name' => 'required',
+            'firstname' => 'required',
+            'lastname' => 'required',
+            'username' => 'required',
             'email' => 'required',
             'password' => 'required',
         ]);
@@ -98,29 +87,21 @@ class AuthController extends Controller
         $data = $request;
 
         $user=new User;
-        $user->name=$data['name'];
+        $user->firstname=$data['firstname'];
+        $user->lastname=$data['lastname'];
+        $user->username=$data['username'];
         $user->email=$data['email'];
         $user->password=bcrypt($data['password']);
 
         if($user->save()){
-           return "se ha registrado ffff correctamente el usuario";               
-       }
-    }
-
+         return "Se ha registrado correctamente el Nuevo Usuario";               
+     }
+ }
 //registro
-
-   protected function getLogout()
-   {
+ protected function getLogout()
+ {
     $this->auth->logout();
-
     Session::flush();
-
     return redirect('login');
 }
-
-
-
-
-
-
 }

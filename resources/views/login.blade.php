@@ -40,7 +40,7 @@
     <form action="login" method="post">
        <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">   
       <div class="form-group has-feedback">
-        <input type="email" class="form-control" name="email" >
+        <input type="text" class="form-control" name="username" >
         <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
       </div>
       <div class="form-group has-feedback">
