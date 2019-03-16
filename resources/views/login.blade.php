@@ -36,7 +36,6 @@
   <!-- /.login-logo -->
   <div class="login-box-body">
     <p class="login-box-msg">Ingrese al sistema</p>
-
     <form action="login" method="post">
        <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">   
       <div class="form-group has-feedback">
@@ -62,7 +61,6 @@
         <!-- /.col -->
       </div>
     </form>
-
     {{-- <div class="social-auth-links text-center">
       <p>- OR -</p>
       <a href="#" class="btn btn-block btn-social btn-facebook btn-flat"><i class="fa fa-facebook"></i> Sign in using

@@ -33,8 +33,7 @@
       <p class="login-box-msg">Registro en el sistema</p>
 
       <form action="register" method="post">
-        <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">   
-
+        <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
         <div class="form-group has-feedback">
           <label>Nombre</label>
           <input type="text" class="form-control" name="firstname" >
