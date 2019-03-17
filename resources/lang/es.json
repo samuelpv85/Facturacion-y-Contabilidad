@@ -1,0 +1,9 @@
+{
+	"The firstname field is required": "El campo de primer nombre es obligatorio",
+	"The lastname field is required": "El campo de apellido es obligatorio",
+	"The username field is required": "El campo de nombre de usuario es obligatorio",
+	"The email field is required": "El campo de correo electrónico es obligatorio",
+	"The password field is required": "El campo de contraseña es obligatorio",
+	// 'required' => 'The :attribute field is required.',
+}
+

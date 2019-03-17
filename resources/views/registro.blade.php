@@ -1,3 +1,5 @@
+{{-- @if(session('success')) {{session('success')}} @endif --}}
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -24,6 +26,9 @@
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
 </head>
+
+
+
 <body class="hold-transition login-page">
   <div class="login-box">
     <div class="login-logo">
@@ -31,6 +36,30 @@
     </div><!-- /.login-logo -->
     <div class="login-box-body">
       <p class="login-box-msg">Registro en el sistema</p>
+
+      {{-- @include('messages') --}}
+
+      @if (session('status'))
+      <div class="alert alert-success" fade in role="alert">
+        {{ session('status') }}
+      </div>
+      @endif
+      {{-- @if (session('err'))
+      <div class="alert alert-success" fade in role="alert">
+        {{ session('err') }}
+      </div>
+      @endif --}}
+
+      @if ($errors->any())
+      <div class="alert alert-danger">
+        <ul>
+          @foreach ($errors->all() as $error)
+            <li>{{ $error }}</li>
+          @endforeach
+        </ul>
+      </div>
+      @endif
+
 
       <form action="register" method="post">
         <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
@@ -78,6 +107,12 @@
       </div><!-- /.login-box-body -->
     </div><!-- /.login-box -->
 
+
+
+      <div class="alert alert-success" fade in>
+      hola alerta
+      </div>
+
     <!-- jQuery 2.1.4 -->
     <script src="../../bower_components/jquery/dist/jquery.min.js"></script>
     <!-- Bootstrap 3.3.7 -->
@@ -94,6 +129,16 @@ increaseArea: '20%' // optional
 });
       });
     </script>
+    <script type="text/javascript">
+      $(document).ready(function () {
+        window.setTimeout(function() {
+          $(".alert").fadeTo(1000, 0).slideUp(1000, function(){
+            $(this).remove();
+          });
+        }, 4000);
+      });
+    </script>
 
-  </body>
-  </html>
+    
+</body>
+</html>

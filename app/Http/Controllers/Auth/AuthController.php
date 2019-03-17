@@ -7,6 +7,9 @@ use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 // use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
 
+use Illuminate\Routing\Redirector;
+
+
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
@@ -17,16 +20,7 @@ use Session;
 
 class AuthController extends Controller
 {
-    /*
-    |--------------------------------------------------------------------------
-    | Registration & Login Controller
-    |--------------------------------------------------------------------------
-    |
-    | This controller handles the registration of new users, as well as the
-    | authentication of existing users. By default, this controller uses
-    | a simple trait to add these behaviors. Why don't you explore it?
-    |
-    */
+   
     use ThrottlesLogins;
 
     /**
@@ -62,11 +56,10 @@ class AuthController extends Controller
         {
             return view("home");
         }
-        return view()->with("msjerror","credenciales incorrectas");
+        return back()->withErrors(['username' => 'Credenciales No Coinciden']);
     }
 
 //login
-
  //registro   
     protected function getRegister()
     {
@@ -92,8 +85,15 @@ class AuthController extends Controller
         $user->password=bcrypt($data['password']);
 
         if($user->save()){
-         return "Se ha registrado correctamente el Nuevo Usuario";               
-     }
+            return redirect('register')->with('status', 'Usuario ' . $user->username . ' Creado con Exito!!');
+
+            // return response()
+            // ->view('registro', $data, 200)
+            // ->header('Content-Type', $user);
+
+        }
+        //return (' ERROR... No se pudo crear el Usuario');
+        
  }
 //registro
  protected function getLogout()
