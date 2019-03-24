@@ -26,7 +26,7 @@ class RegisterController extends Controller
 
     protected function getRegister()
     {
-        return view("registro");
+        return view("administracion/registro");
     }
 
     protected function postRegister(Request $request){
@@ -48,7 +48,7 @@ class RegisterController extends Controller
         $user->password=bcrypt($data['password']);
 
         if($user->save()){
-            return redirect('register')->with('status', 'Usuario ' . $user->username . ' Creado con Exito!!');
+            return redirect('administracion/register')->with('status', 'Usuario ' . $user->username . ' Creado con Exito!!');
             // return response()
             // ->view('registro', $data, 200)
             // ->header('Content-Type', $user);

@@ -12,8 +12,8 @@
 //     return view('login');
 // });
 
-// Route::get('/registro', function () {
-//     return view('registro');
+// Route::get('grupos', function () {
+//     return view('administracion/grupos');
 // });
 
 Route::get('login', 'Auth\AuthController@getLogin');
@@ -22,15 +22,13 @@ Route::get('logout', ['as' => 'logout', 'uses' => 'Auth\AuthController@getLogout
  
 // Registration routes...
 Route::get('register', 'Auth\RegisterController@getRegister');
-Route::post('register', ['as' => 'auth/register', 'uses' => 'Auth\RegisterController@postRegister']);
+Route::post('register', ['as' => 'register', 'uses' => 'Auth\RegisterController@postRegister']);
 Route::get('/', ['as' => 'home', 'uses' =>  'HomeController@index']);
 Route::get('home', 'HomeController@index')->name('home');
 
 Route::get('roles', 'RolesController@index')->name('roles');
 Route::post('roles', ['as' =>'roles', 'uses' => 'RolesController@store']);
 
+Route::get('grupos', 'GroupsController@index')->name('grupos');
+Route::post('grupos', ['as' =>'grupos', 'uses' => 'GroupsController@store']);
 
-
-// Route::get('foo', function () {
-//     return 'Hello World';
-// });

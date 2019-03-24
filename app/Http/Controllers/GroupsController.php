@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Roles;
+use App\Groups;
 use Illuminate\Http\Request;
 
 /**
@@ -17,14 +17,13 @@ use Storage;
 use Session;
 use Redirect;
 
-class RolesController extends Controller
+class GroupsController extends Controller
 {
 
     public function __construct()
     {
         $this->middleware('auth');
     }
-    
     /**
      * Display a listing of the resource.
      *
@@ -32,8 +31,8 @@ class RolesController extends Controller
      */
     public function index()
     {
-        $roles = Roles::all();
-        return view('administracion/roles', compact('roles')); 
+        $groups = Groups::all();
+        return view('administracion/grupos', compact('administracion/grupos')); 
     }
 
     /**
@@ -43,8 +42,8 @@ class RolesController extends Controller
      */
     public function create()
     {
-        $roles = Roles::all();
-        return view('administracion/roles', compact('roles'));
+         $groups = Groups::all();
+        return view('administracion/grupos', compact('administracion/grupos'));
     }
 
     /**
@@ -55,24 +54,25 @@ class RolesController extends Controller
      */
     public function store(Request $request)
     {
-        $roles = new Roles;
+        $groups = new Groups;
  
-        $roles->name = $request->name;
-        $roles->descripcion = $request->descripcion;
-//        $roles->imagen = $request->file('imagen')->store('roles');
+        $groups->groupname = $request->groupname;
+        $groups->descripcion = $request->descripcion;
+        $groups->active = $request->active;
+//        $groups->imagen = $request->file('imagen')->store('groups');
  
-        $roles->save();
+        $groups->save();
  
-        return redirect('administracion/roles')->with('message','Rol Creado Satisfactoriamente');
+        return redirect('administracion/grupos')->with('message','Grupo Creado Satisfactoriamente');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Roles  $roles
+     * @param  \App\Groups  $groups
      * @return \Illuminate\Http\Response
      */
-    public function show(Roles $roles)
+    public function show(Groups $groups)
     {
         //
     }
@@ -80,44 +80,44 @@ class RolesController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Roles  $roles
+     * @param  \App\Groups  $groups
      * @return \Illuminate\Http\Response
      */
-    public function edit(Roles $roles)
+    public function edit(Groups $groups)
     {
-        $roles = Roles::find($id);
-        return view('administracion/roles.edit',['roles'=>$roles]);
+        $groups = Groups::find($id);
+        return view('administracion/grupos.edit',['groups'=>$groups]);
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Roles  $roles
+     * @param  \App\Groups  $groups
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Roles $roles)
+    public function update(Request $request, Groups $groups)
     {
-        $roles = Roles::find($id);
-        $roles->name = $request->name;
-        $roles->descripcion = $request->descripcion;
-
-        $roles->save();
+        $groups = Groups::find($id);
+        $groups->groupname = $request->groupname;
+        $groups->descripcion = $request->descripcion;
+        $groups->active = $request->active;
+        
+        $groups->save();
 
         Session::flash('message', 'Editado Satisfactoriamente !');
-        return Redirect::to('administracion/roles');
-
+        return Redirect::to('administracion/grupos');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Roles  $roles
+     * @param  \App\Groups  $groups
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Roles $roles)
+    public function destroy(Groups $groups)
     {
-        // $imagen = Postres::find($id);
+         // $imagen = Postres::find($id);
  
         // foreach($imagen as $image){
         //     Storage::delete($image['imagen']);

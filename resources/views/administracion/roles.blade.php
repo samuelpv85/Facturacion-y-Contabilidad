@@ -1,6 +1,6 @@
 @extends('layouts/layout')
 
-@section('title', 'Roles')
+@section('title', 'ADM Roles')
 
 
 @section('content')

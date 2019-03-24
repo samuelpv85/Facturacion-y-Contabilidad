@@ -251,7 +251,7 @@ href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,30
               </span>
             </a>
             <ul class="treeview-menu">
-              <li><a href="#"><i class="fa fa-circle-o"></i> Grupos</a></li>
+              <li><a href="grupos"><i class="fa fa-circle-o"></i> Grupos</a></li>
               <li><a href="roles"><i class="fa fa-circle-o"></i> Permisos y Roles</a></li>
               <li><a href="register"><i class="fa fa-circle-o"></i> Usuarios</a></li>
               {{-- tercer nivel --}}
