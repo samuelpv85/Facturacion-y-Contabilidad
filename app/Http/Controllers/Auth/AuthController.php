@@ -9,10 +9,8 @@ use Illuminate\Foundation\Auth\ThrottlesLogins;
 
 use Illuminate\Routing\Redirector;
 
-
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
-
 
 use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Http\Request;
@@ -62,6 +60,8 @@ class AuthController extends Controller
  //registro   
     protected function getRegister()
     {
+        // $this->auth->getRegister();
+        $this->middleware('auth');
         return view("registro");
     }
 

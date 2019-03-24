@@ -21,10 +21,14 @@ Route::post('login', ['as' =>'login', 'uses' => 'Auth\AuthController@postLogin']
 Route::get('logout', ['as' => 'logout', 'uses' => 'Auth\AuthController@getLogout']);
  
 // Registration routes...
-Route::get('register', 'Auth\AuthController@getRegister');
-Route::post('register', ['as' => 'auth/register', 'uses' => 'Auth\AuthController@postRegister']);
+Route::get('register', 'Auth\RegisterController@getRegister');
+Route::post('register', ['as' => 'auth/register', 'uses' => 'Auth\RegisterController@postRegister']);
 Route::get('/', ['as' => 'home', 'uses' =>  'HomeController@index']);
 Route::get('home', 'HomeController@index')->name('home');
+
+Route::get('roles', 'RolesController@index')->name('roles');
+Route::post('roles', ['as' =>'roles', 'uses' => 'RolesController@store']);
+
 
 
 // Route::get('foo', function () {

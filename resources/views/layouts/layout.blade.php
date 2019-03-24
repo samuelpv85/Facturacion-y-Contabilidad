@@ -35,7 +35,7 @@ href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,30
     <header class="main-header">
 
       <!-- Logo -->
-      <a href="index2.html" class="logo">
+      <a href="home" class="logo">
         <!-- mini logo for sidebar mini 50x50 pixels -->
         <span class="logo-mini"><b>A</b>LT</span>
         <!-- logo for regular state and mobile devices -->
@@ -252,8 +252,8 @@ href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,30
             </a>
             <ul class="treeview-menu">
               <li><a href="#"><i class="fa fa-circle-o"></i> Grupos</a></li>
-              <li><a href="#"><i class="fa fa-circle-o"></i> Permisos y Roles</a></li>
-              <li><a href="#"><i class="fa fa-circle-o"></i> Usuarios</a></li>
+              <li><a href="roles"><i class="fa fa-circle-o"></i> Permisos y Roles</a></li>
+              <li><a href="register"><i class="fa fa-circle-o"></i> Usuarios</a></li>
               {{-- tercer nivel --}}
             </ul>
           </li>
