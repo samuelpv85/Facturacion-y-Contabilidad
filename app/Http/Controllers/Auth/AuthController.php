@@ -56,9 +56,8 @@ class AuthController extends Controller
         {
             return view("home");
         }
-        return back()->withErrors(['username' => 'Credenciales No Coinciden']);
+        return back()->withErrors(['userpass' => 'Credenciales No Coinciden']);
     }
-
 //login
  //registro   
     protected function getRegister()
@@ -70,9 +69,9 @@ class AuthController extends Controller
         $this->validate($request, [
             'firstname' => 'required',
             'lastname' => 'required',
-            'username' => 'required',
-            'email' => 'required',
-            'password' => 'required',
+            'username' => 'required|unique:users|min:3', //valida que el usuario sea unico y tenga minimo 3 caracteres
+            'email' => 'required|email',
+            'password' => 'required|min:5',//valida que el passwor tenga minimo 6 caracteres
         ]);
 
         $data = $request;
@@ -86,14 +85,11 @@ class AuthController extends Controller
 
         if($user->save()){
             return redirect('register')->with('status', 'Usuario ' . $user->username . ' Creado con Exito!!');
-
             // return response()
             // ->view('registro', $data, 200)
             // ->header('Content-Type', $user);
-
         }
-        //return (' ERROR... No se pudo crear el Usuario');
-        
+        //return (' ERROR... No se pudo crear el Usuario');        
  }
 //registro
  protected function getLogout()

@@ -23,8 +23,8 @@ Route::get('logout', ['as' => 'logout', 'uses' => 'Auth\AuthController@getLogout
 // Registration routes...
 Route::get('register', 'Auth\AuthController@getRegister');
 Route::post('register', ['as' => 'auth/register', 'uses' => 'Auth\AuthController@postRegister']);
-Route::get('/', 'HomeController@index');
-Route::get('home', 'HomeController@index');
+Route::get('/', ['as' => 'home', 'uses' =>  'HomeController@index']);
+Route::get('home', 'HomeController@index')->name('home');
 
 
 // Route::get('foo', function () {

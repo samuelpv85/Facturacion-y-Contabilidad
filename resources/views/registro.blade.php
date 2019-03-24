@@ -1,5 +1,7 @@
-{{-- @if(session('success')) {{session('success')}} @endif --}}
+{{-- @extends('layouts/layout') --}}
 
+{{-- @section('title', 'Registro') --}}
+ 
 <!DOCTYPE html>
 <html>
 <head>
@@ -25,6 +27,8 @@
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
+
+{{-- @section('content') --}}
 </head>
 
 
@@ -38,18 +42,13 @@
       <p class="login-box-msg">Registro en el sistema</p>
 
       {{-- @include('messages') --}}
-
+{{-- alerta de usuario creado --}}
       @if (session('status'))
       <div class="alert alert-success" fade in role="alert">
         {{ session('status') }}
       </div>
       @endif
-      {{-- @if (session('err'))
-      <div class="alert alert-success" fade in role="alert">
-        {{ session('err') }}
-      </div>
-      @endif --}}
-
+  {{-- alerta de validacion de campos --}}
       @if ($errors->any())
       <div class="alert alert-danger">
         <ul>
@@ -65,17 +64,17 @@
         <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
         <div class="form-group has-feedback">
           <label>Nombre</label>
-          <input type="text" class="form-control" name="firstname" >
+          <input type="text" class="form-control" name="firstname" value="{{ old('firstname') }}">
           <span class="glyphicon glyphicon-user form-control-feedback"></span>
         </div>
         <div class="form-group has-feedback">
           <label>Apellido</label>
-          <input type="text" class="form-control" name="lastname" >
+          <input type="text" class="form-control" name="lastname" value="{{ old('lastname') }}">
           <span class="glyphicon glyphicon-user form-control-feedback"></span>
         </div>
         <div class="form-group has-feedback">
           <label>Usuario</label>
-          <input type="text" class="form-control" name="username" >
+          <input type="text" class="form-control" name="username" value="{{ old('username') }}">
           <span class="glyphicon glyphicon-user form-control-feedback"></span>
         </div>
         <div class="form-group has-feedback">
@@ -83,17 +82,17 @@
             <label>
               <input type="checkbox" class="form-control" name="activo"> Activo
             </label>
-            {{-- <input type="text" class="form-control" name="apellido" > --}}
+            {{-- <input type="text" class="form-control" name="apellido" value="{{ old('') }}"> --}}
             <span class="glyphicon glyphicon-user form-control-feedback"></span>
           </div>
           <div class="form-group has-feedback">
             <label>Email</label>
-            <input type="email" class="form-control" name="email" >
+            <input type="email" class="form-control" name="email" value="{{ old('email') }}">
             <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
           </div>
           <div class="form-group has-feedback">
             <label>Password</label>
-            <input type="password" class="form-control" name="password" >
+            <input type="password" class="form-control" name="password" value="{{ old('') }}">
             <span class="glyphicon glyphicon-lock form-control-feedback"></span>
           </div>
 
@@ -141,4 +140,8 @@ increaseArea: '20%' // optional
 
     
 </body>
+
+
+{{-- @endsection --}}
+
 </html>

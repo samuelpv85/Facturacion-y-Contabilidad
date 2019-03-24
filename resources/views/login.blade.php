@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>AdminLTE 2 | Log in</title>
+  <title>SisCont | Login</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <!-- Bootstrap 3.3.7 -->
@@ -34,20 +34,23 @@
     <a href="#"><b>Nombre o logo</b>Sistema</a> 
   </div>
   <!-- /.login-logo -->
+  {{-- {{ $errors }} --}}
   <div class="login-box-body">
     <p class="login-box-msg">Ingrese al sistema</p>
     <form action="login" method="post">
        <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">   
       <div class="form-group has-feedback {{ $errors->has('username') ? 'has-error' : '' }}">
+        {!!  $errors->first('userpass', '<span style="color:red" class="help-block">:message</span>') !!}
         <label for="username">Usuario</label>
         <input type="text" class="form-control" name="username" placeholder="Ingresa tu Usuario" >
         <span class="glyphicon glyphicon-user form-control-feedback"></span>
-        {!!  $errors->first('usuario', '<span class="help-block">:message</span>') !!}
+        {!!  $errors->first('username', '<span class="help-block">:message</span>') !!}
       </div>
       <div class="form-group has-feedback {{ $errors->has('password') ? 'has-error' : '' }}">
         <label for="username">Password</label>
         <input type="password" class="form-control" name="password" placeholder="Ingresa tu Password">
         <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+        {!!  $errors->first('password', '<span class="help-block">:message</span>') !!}
       </div>
       <div class="row">
         <div class="col-xs-6">
