@@ -14,7 +14,7 @@ use DB;
 use Input;
 use Storage;
 
-use Session;
+
 use Redirect;
 
 class RolesController extends Controller
@@ -24,16 +24,26 @@ class RolesController extends Controller
     {
         $this->middleware('auth');
     }
-    
     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+         * @return \Illuminate\Http\Response
+    */
     public function index()
-    {
-        $roles = Roles::all();
-        return view('administracion/roles', compact('roles')); 
+    {   
+        try {
+            //select * a la tabla
+            $roles = Roles::all();
+        // enviamos $roles por medio de 'roles'
+        // vista 
+            \Log::info('Administración - Control de Acceso -  Permisos y Roles');
+            \Log::info(request()->route()->getActionName());
+            // 'roles'->varianle a enviar a la vista
+            // $roles-> valores obtenidos del select
+            return view('administracion/roles', ['roles' => $roles]);
+            //otra forma de enviar la variable a la vista
+            // return view('administracion/roles', compact(roles));
+        } catch (Exception $e) {
+            \Log::debug($e);
+        }        
     }
 
     /**
@@ -43,35 +53,51 @@ class RolesController extends Controller
      */
     public function create()
     {
-        $roles = Roles::all();
-        return view('administracion/roles', compact('roles'));
+        //retornar a una vista de crear. este caso un modal
+        // $roles = Roles::all();
+        // return view('administracion/roles', compact('roles'));
     }
 
     /**
-     * Store a newly created resource in storage.
-     *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
-        $roles = new Roles;
- 
-        $roles->name = $request->name;
-        $roles->descripcion = $request->descripcion;
+        // try {
+            $this->validate($request, [
+                'rolname' => 'required|unique:roles',
+                'descripcion' => 'required',
+            ]);
+            // if ($validate->fails()){
+            // }
+            $data = $request;
+
+            $roles=new Roles;
+            $roles->rolname=$data['rolname'];
+            $roles->descripcion=$data['descripcion'];
+            // if (DB::table('roles')->where('rolname', $roles)->exists()) {
+            //     echo " rol duplicado";
+            // }else{
+            if($roles->save()){
+                \Log::info('Rol ' . $roles->rolname . ' Creado con Exito!!');
+                \Log::info(request()->route()->getActionName());
+                return redirect('roles')->with('status', 'Rol ' . $roles->rolname . ' Creado con Exito!!');
+                // \Log::info('Info Crear Usuario');
+                // Log::stack(['single', 'slack'])->info('Something happened!');
 //        $roles->imagen = $request->file('imagen')->store('roles');
- 
-        $roles->save();
- 
-        return redirect('administracion/roles')->with('message','Rol Creado Satisfactoriamente');
+            // }   
+            }
+            // else {
+            //     # code...
+            // return Redirect::back()->withErrors($user->errors)->withInput();
+            // }            
+        // } catch (Exception $e) {
+        //     Log::debug($e);
+        //     Log::stack(['single', 'slack'])->info('Something happened!');
+        // }
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Roles  $roles
-     * @return \Illuminate\Http\Response
-     */
     public function show(Roles $roles)
     {
         //
@@ -85,8 +111,9 @@ class RolesController extends Controller
      */
     public function edit(Roles $roles)
     {
-        $roles = Roles::find($id);
-        return view('administracion/roles.edit',['roles'=>$roles]);
+        // $roles = Roles::find($id);
+        return view('administracion/roles', compact('roles'));
+        // return view('administracion/roles.edit',['roles'=>$roles]);
     }
 
     /**
@@ -115,16 +142,19 @@ class RolesController extends Controller
      * @param  \App\Roles  $roles
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Roles $roles)
+    // public function destroy(Roles $roles)
+    public function destroy($id)
     {
+        Roles::find($id)->delete();
+        return redirect('roles')->with('status', 'Rol ' . $roles->rolname . ' Eliminado con Exito!!');
         // $imagen = Postres::find($id);
- 
+
         // foreach($imagen as $image){
         //     Storage::delete($image['imagen']);
         // }
- 
+
         // Postres::destroy($id);        
- 
+
         // Session::flash('message', 'Eliminado Satisfactoriamente !');
         // return Redirect::to('admin/postres');
     }

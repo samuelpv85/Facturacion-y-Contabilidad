@@ -10,6 +10,23 @@
 	{{-- {{ Log::info(session('status')) }} --}}
 </div>
 @endif
+{{-- {{  Log::error($exception) }} --}}
+
+{{-- {{ Log::info(print_r($users, false)) }} --}}
+
+{{-- {{ error_log('Some message here.') }} --}}
+
+{{-- {{ Log::debug((request()->route()->getAction())) }} --}}
+{{-- {{ Log::info(request()->route()->getActionMethod()) }} --}}
+{{-- {{ Log::info(request()->route()->getActionName()) }} --}}
+{{-- {{ Log::debug(Route::getCurrentRoute()->getActionName()) }} --}}
+
+{{-- {{ var_dump($roles) }} --}}
+{{-- {{ var_dump(Session::get(5)) }} --}}
+
+{{-- {{ session }} --}}
+
+
 
 <div class="box">
 	<div class="box-header">

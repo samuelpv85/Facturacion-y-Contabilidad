@@ -48,7 +48,7 @@ class RegisterController extends Controller
         $user->password=bcrypt($data['password']);
 
         if($user->save()){
-            return redirect('administracion/register')->with('status', 'Usuario ' . $user->username . ' Creado con Exito!!');
+            return redirect('register')->with('status', 'Usuario ' . $user->username . ' Creado con Exito!!');
             // return response()
             // ->view('registro', $data, 200)
             // ->header('Content-Type', $user);

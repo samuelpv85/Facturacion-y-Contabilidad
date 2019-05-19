@@ -31,8 +31,8 @@ class GroupsController extends Controller
      */
     public function index()
     {
-        $groups = Groups::all();
-        return view('administracion/grupos', compact('administracion/grupos')); 
+        $grupos = Groups::all();
+        return view('administracion/grupos', ['grupos' => $grupos]); 
     }
 
     /**
@@ -42,8 +42,8 @@ class GroupsController extends Controller
      */
     public function create()
     {
-         $groups = Groups::all();
-        return view('administracion/grupos', compact('administracion/grupos'));
+        //  $groups = Groups::all();
+        // return view('administracion/grupos', compact('administracion/grupos'));
     }
 
     /**
@@ -54,18 +54,30 @@ class GroupsController extends Controller
      */
     public function store(Request $request)
     {
-        $groups = new Groups;
- 
-        $groups->groupname = $request->groupname;
-        $groups->descripcion = $request->descripcion;
-        $groups->active = $request->active;
-//        $groups->imagen = $request->file('imagen')->store('groups');
- 
-        $groups->save();
- 
-        return redirect('administracion/grupos')->with('message','Grupo Creado Satisfactoriamente');
-    }
+        $this->validate($request, [
+                'groupname' => 'required',
+                'descripcion' => 'required',
+            ]);
 
+            // if ($validate->fails()){
+
+            // }
+
+            $data = $request;
+
+            $grupos=new Groups;
+            $grupos->groupname=$data['groupname'];
+            $grupos->descripcion=$data['descripcion'];
+
+            if($grupos->save()){
+                return redirect('grupos')->with('status', 'Grupo ' . $grupos->groupname . ' Creado con Exito!!');
+                // Log::stack(['single', 'slack'])->info('Something happened!');
+//        $roles->imagen = $request->file('imagen')->store('roles');
+            }
+
+
+
+       }
     /**
      * Display the specified resource.
      *

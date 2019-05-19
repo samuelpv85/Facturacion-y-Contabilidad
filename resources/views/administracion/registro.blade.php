@@ -37,6 +37,7 @@
   <div class="login-box">
     <div class="login-logo">
       <a href="#"><b>Crear</b>Usuario</a>
+
     </div><!-- /.login-logo -->
     <div class="login-box-body">
       <p class="login-box-msg">Registro en el sistema</p>
@@ -128,6 +129,7 @@ increaseArea: '20%' // optional
 });
       });
     </script>
+    
     <script type="text/javascript">
       $(document).ready(function () {
         window.setTimeout(function() {

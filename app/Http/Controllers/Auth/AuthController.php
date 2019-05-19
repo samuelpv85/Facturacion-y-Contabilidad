@@ -52,6 +52,7 @@ class AuthController extends Controller
         $credentials = $request->only('username', 'password');
         if ($this->auth->attempt($credentials, $request->has('remember')))
         {
+            // \Log::debug( 'sesion', [auth()->user()->username] );
             return view("home");
         }
         return back()->withErrors(['userpass' => 'Credenciales No Coinciden']);
@@ -96,6 +97,7 @@ class AuthController extends Controller
  {
     $this->auth->logout();
     Session::flush();
+    \Log::info( request()->route()->getActionName(), ['closed session']);
     return redirect('login');
 }
 }

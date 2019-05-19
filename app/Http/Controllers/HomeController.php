@@ -30,6 +30,7 @@ class HomeController extends Controller {
 	 */
 	public function index()
 	{
+		\Log::info(request()->route()->getActionName());
 		return view('home');
 	}
 	// public function register()
